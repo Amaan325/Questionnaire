@@ -5,25 +5,29 @@ import vector from "../assets/icons/Vector.svg";
 const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
     // Calculate BFNE score with reverse scoring
     const calculateBFNEScore = (answers) => {
+        // Reverse scored items: 2, 4, 7, 10 (0-indexed: 1, 3, 6, 9)
         const reverseScoredItems = [1, 3, 6, 9];
-        const answerValues = Object.values(answers);
-
-        console.log("Raw answers:", answerValues); // See original answers
+        const totalQuestions = 12;
 
         let totalScore = 0;
-        answerValues.forEach((value, index) => {
-            if (reverseScoredItems.includes(index)) {
-                const reversed = 4 - value;
-                console.log(`Q${index + 1} (reverse): ${value} → ${reversed}`);
-                totalScore += reversed;
+
+        // Iterate over each question by index
+        for (let i = 0; i < totalQuestions; i++) {
+            // Get the answer for this question (default to 0 if not answered)
+            const value = answers[i] !== undefined ? answers[i] : 0;
+
+            if (reverseScoredItems.includes(i)) {
+                // Reverse score: 0->4, 1->3, 2->2, 3->1, 4->0
+                totalScore += (4 - value);
             } else {
-                console.log(`Q${index + 1} (normal): ${value}`);
                 totalScore += value;
             }
-        });
+        }
 
+        // Convert from 0-4 scale to 1-5 scale (add 1 to each answer)
+        // Total score range: 12-60
         const finalScore = totalScore + 12;
-        console.log("Final score:", finalScore);
+
         return finalScore;
     };
 
@@ -33,17 +37,17 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
         if (score <= 20) {
             return {
                 type: "Low Social Anxiety",
-                description: "You show very low levels of social anxiety. You're comfortable in social situations and don't worry much about others' opinions. You have a healthy sense of self and are able to engage with others without excessive concern about being judged.",
+                description: "You show very low levels of social anxiety. You're comfortable in social situations and don't worry much about others' opinions. You have a healthy sense of self and are able to engage with others without excessive concern about being judged."
             };
         } else if (score <= 40) {
             return {
                 type: "Moderate Social Anxiety",
-                description: "You experience moderate levels of social anxiety. You sometimes worry about others' opinions and may feel some discomfort in social situations. This is a common experience that many people share. Consider practicing self-compassion and gradually building confidence in social settings.",
+                description: "You experience moderate levels of social anxiety. You sometimes worry about others' opinions and may feel some discomfort in social situations. This is a common experience that many people share. Consider practicing self-compassion and gradually building confidence in social settings."
             };
         } else {
             return {
                 type: "High Social Anxiety",
-                description: "You show signs of significant social anxiety. You frequently worry about others' opinions and may find social situations particularly challenging. This level of social anxiety can impact daily life. Consider speaking with a mental health professional who can help you develop strategies to manage these feelings.",
+                description: "You show signs of significant social anxiety. You frequently worry about others' opinions and may find social situations particularly challenging. This level of social anxiety can impact daily life. Consider speaking with a mental health professional who can help you develop strategies to manage these feelings."
             };
         }
     };
@@ -139,7 +143,7 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
             <div className="flex flex-col items-start p-0 gap-8 w-[540px] h-auto flex-none order-0 self-stretch grow-0">
                 {/* Congrats Section */}
                 <div className="flex flex-col items-center p-0 gap-6 w-[540px] h-auto flex-none order-0 self-stretch grow-0">
-                    {/* Check Badge Icon - Using Vector.svg */}
+                    {/* Check Badge Icon */}
                     <motion.div
                         className="w-[72px] h-[72px] flex-none order-0 grow-0 relative"
                         variants={iconVariants}
@@ -156,7 +160,7 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
                             Congratulations!
                         </h1>
                         <p className="w-[540px] h-[29px] font-['Lato'] font-normal text-[28px] leading-[102.08%] text-center text-[#191C1C] flex-none order-1 self-stretch grow-0">
-                            You have {result.type}
+                            You are a {result.type}
                         </p>
                     </motion.div>
                 </div>
