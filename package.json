@@ -2,7 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Amaan325.github.io/Invoice-Generator",
+  "homepage": "https://Amaan325.github.io/Questionnaire",
   "type": "module",
   "scripts": {
     "dev": "vite",
