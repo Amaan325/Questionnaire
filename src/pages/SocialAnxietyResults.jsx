@@ -135,17 +135,17 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
 
     return (
         <motion.div
-            className="flex flex-col items-center p-8 gap-8 w-[604px] min-h-[650px] h-auto bg-[#FFF2D5] rounded-[32px]"
+            className="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 my-2 sm:my-3 lg:my-4 h-auto w-full max-w-[604px] mx-auto bg-[#FFF2D5] rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] overflow-hidden"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
-            <div className="flex flex-col items-start p-0 gap-8 w-[540px] h-auto flex-none order-0 self-stretch grow-0">
+            <div className="flex flex-col items-start p-0 gap-4 sm:gap-5 lg:gap-6 w-full max-w-[540px] h-auto flex-none order-0 self-stretch grow-0">
                 {/* Congrats Section */}
-                <div className="flex flex-col items-center p-0 gap-6 w-[540px] h-auto flex-none order-0 self-stretch grow-0">
+                <div className="flex flex-col items-center p-0 gap-3 sm:gap-4 lg:gap-5 w-full h-auto flex-none order-0 self-stretch grow-0">
                     {/* Check Badge Icon */}
                     <motion.div
-                        className="w-[72px] h-[72px] flex-none order-0 grow-0 relative"
+                        className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[72px] lg:h-[72px] flex-none order-0 grow-0 relative"
                         variants={iconVariants}
                     >
                         <img src={vector} alt="Success" className="w-full h-full" />
@@ -153,13 +153,13 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
 
                     {/* Text Content */}
                     <motion.div
-                        className="flex flex-col items-center p-0 gap-4 w-[540px] h-auto flex-none order-1 self-stretch grow-0"
+                        className="flex flex-col items-center p-0 gap-1 sm:gap-1.5 lg:gap-2 w-full h-auto flex-none order-1 self-stretch grow-0"
                         variants={itemVariants}
                     >
-                        <h1 className="w-[540px] h-[33px] font-['Lora'] font-semibold text-[32px] leading-[102.08%] text-center text-[#191C1C] flex-none order-0 self-stretch grow-0">
+                        <h1 className="w-full h-auto font-['Lora'] font-semibold text-xl sm:text-2xl lg:text-3xl leading-[102.08%] text-center text-[#191C1C] flex-none order-0 self-stretch grow-0">
                             Congratulations!
                         </h1>
-                        <p className="w-[540px] h-[29px] font-['Lato'] font-normal text-[28px] leading-[102.08%] text-center text-[#191C1C] flex-none order-1 self-stretch grow-0">
+                        <p className="w-full h-auto font-['Lato'] font-normal text-lg sm:text-xl lg:text-2xl leading-[102.08%] text-center text-[#191C1C] flex-none order-1 self-stretch grow-0">
                             You are a {result.type}
                         </p>
                     </motion.div>
@@ -167,7 +167,7 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
 
                 {/* Underline - Just below the result text */}
                 <motion.div
-                    className="w-[240px] h-[1px] mx-auto bg-[#191C1C] flex-none order-1 self-center"
+                    className="w-[180px] sm:w-[200px] lg:w-[240px] h-[1px] mx-auto bg-[#191C1C] flex-none order-1 self-center"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -175,73 +175,73 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
 
                 {/* Description */}
                 <motion.p
-                    className="w-[540px] h-auto font-['Lato'] font-light text-[20px] leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0"
+                    className="w-full h-auto font-['Lato'] font-light text-sm sm:text-base lg:text-lg leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0"
                     variants={itemVariants}
                 >
                     {result.description}
                 </motion.p>
-            </div>
 
-            {/* Recommended Articles Section */}
-            <motion.div
-                className="box-border flex flex-col items-start p-6 gap-4 w-[540px] h-auto min-h-[188px] border border-[#191C1C] rounded-3xl flex-none order-1 self-stretch grow-0"
-                variants={itemVariants}
-            >
-                <h3 className="w-full h-6 font-['Merriweather'] font-normal text-[20px] leading-[120%] text-[#191C1C] flex-none order-0 self-stretch grow-0">
-                    Recommended Articles to Read
-                </h3>
-                <div className="flex flex-col items-start p-0 gap-2 w-full h-auto flex-none order-1 self-stretch grow-0">
-                    {recommendedArticles.map((article, index) => (
-                        <motion.div
-                            key={index}
-                            className="flex flex-row items-start gap-2 w-full h-auto flex-none order-0 self-stretch grow-0"
-                            custom={index}
-                            variants={articleVariants}
-                            initial="hidden"
-                            animate="visible"
-                        >
-                            <span className="text-[#191C1C] font-['Lato'] text-[16px] leading-[120%] flex-shrink-0">•</span>
-                            <motion.a
-                                href="#"
-                                className="inline-block font-['Lato'] font-light text-[16px] leading-[120%] text-[#191C1C] hover:text-[#FFCF6C] transition-colors border-b border-[#191C1C] border-opacity-20 pb-0.5"
-                                whileHover={{ x: 5 }}
-                                transition={{ duration: 0.2 }}
+                {/* Recommended Articles Section */}
+                <motion.div
+                    className="box-border flex flex-col items-start p-4 sm:p-5 lg:p-6 gap-3 sm:gap-3.5 lg:gap-4 w-full max-w-[540px] h-auto min-h-[140px] sm:min-h-[160px] lg:min-h-[188px] border border-[#191C1C] rounded-2xl sm:rounded-3xl flex-none order-3 self-stretch grow-0"
+                    variants={itemVariants}
+                >
+                    <h3 className="w-full h-auto font-['Merriweather'] font-normal text-base sm:text-lg lg:text-xl leading-[120%] text-[#191C1C] flex-none order-0 self-stretch grow-0">
+                        Recommended Articles to Read
+                    </h3>
+                    <div className="flex flex-col items-start p-0 gap-1.5 sm:gap-2 w-full h-auto flex-none order-1 self-stretch grow-0">
+                        {recommendedArticles.map((article, index) => (
+                            <motion.div
+                                key={index}
+                                className="flex flex-row items-start gap-1.5 sm:gap-2 w-full h-auto flex-none order-0 self-stretch grow-0"
+                                custom={index}
+                                variants={articleVariants}
+                                initial="hidden"
+                                animate="visible"
                             >
-                                {article}
-                            </motion.a>
-                        </motion.div>
-                    ))}
-                </div>
-            </motion.div>
+                                <span className="text-[#191C1C] font-['Lato'] text-xs sm:text-sm lg:text-base leading-[120%] flex-shrink-0">•</span>
+                                <motion.a
+                                    href="#"
+                                    className="inline-block font-['Lato'] font-light text-xs sm:text-sm lg:text-base leading-[120%] text-[#191C1C] hover:text-[#FFCF6C] transition-colors border-b border-[#191C1C] border-opacity-20 pb-0.5"
+                                    whileHover={{ x: 5 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    {article}
+                                </motion.a>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
 
-            {/* Action Buttons */}
-            <motion.div
-                className="flex flex-row justify-center items-start p-0 gap-8 w-[401px] h-[56px] flex-none order-2 grow-0"
-                variants={itemVariants}
-            >
-                <motion.button
-                    className="flex flex-row justify-center items-center p-4 gap-2.5 w-[133px] h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none order-0 grow-0"
-                    onClick={onRetake}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
+                {/* Action Buttons */}
+                <motion.div
+                    className="flex flex-col sm:flex-row justify-center items-center p-0 gap-3 sm:gap-4 lg:gap-6 w-full max-w-[401px] h-auto sm:h-[56px] flex-none order-4 self-center grow-0"
+                    variants={itemVariants}
                 >
-                    <span className="w-[104px] h-6 font-['Lato'] font-semibold text-[20px] leading-[120%] text-[#191C1C] flex-none order-0 grow-0">
-                        Retake Test
-                    </span>
-                </motion.button>
-                <motion.button
-                    className="flex flex-row justify-center items-center p-4 px-0 gap-2.5 w-[236px] h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none order-1 grow-0"
-                    onClick={onLearnMore}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                >
-                    <span className="w-[238px] h-6 font-['Lato'] font-semibold text-[20px] leading-[120%] underline text-[#191C1C] flex-none order-0 grow-0">
-                        Learn More about this Test
-                    </span>
-                </motion.button>
-            </motion.div>
+                    <motion.button
+                        className="flex flex-row justify-center items-center p-3 sm:p-4 gap-2.5 w-full sm:w-[133px] h-[48px] sm:h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none order-0 grow-0"
+                        onClick={onRetake}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <span className="w-full h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] text-[#191C1C] flex-none order-0 grow-0">
+                            Retake Test
+                        </span>
+                    </motion.button>
+                    <motion.button
+                        className="flex flex-row justify-center items-center p-3 sm:p-4 px-0 gap-2.5 w-full sm:w-[236px] h-[48px] sm:h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none order-1 grow-0"
+                        onClick={onLearnMore}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <span className="w-[220px] h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] underline text-[#191C1C] flex-none order-0 grow-0">
+                            Learn More about this Test
+                        </span>
+                    </motion.button>
+                </motion.div>
+            </div>
         </motion.div>
     );
 };
