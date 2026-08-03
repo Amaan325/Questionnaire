@@ -8,31 +8,34 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
 
     const questions = [
         "I worry about what other people will think of me even when I know it doesn't make any difference.",
-        "I am unconcerned even if I know people are forming an unfavorable impression of me.",
+        "It bothers me when people form an unfavorable impression of me.",
         "I am frequently afraid of other people noticing my shortcomings.",
-        "I rarely worry about what kind of impression I am making on someone.",
-        "I am afraid others will not approve of me.",
-        "I am afraid that people will find fault with me.",
-        "Other people's opinions of me do not bother me.",
+        "I worry about what kind of impression I make on people.",
+        "I am afraid that others will not approve of me.",
+        "I am afraid that other people will find fault with me.",
+        "I am concerned about other people's opinions of me.",
         "When I am talking to someone, I worry about what they may be thinking about me.",
         "I am usually worried about what kind of impression I make.",
-        "If I know someone is judging me, it has little effect on me.",
+        "If I know someone is judging me, it tends to bother me.",
         "Sometimes I think I am too concerned with what other people think of me.",
-        "I often worry that I will say or do the wrong things."
+        "I often worry that I will say or do wrong things."
     ];
 
+    // BFNE-II uses 1-5 scale (not 0-4)
     const options = [
         "Not at all characteristic of me",
-        "Slightly characteristic of me",
-        "Moderately characteristic of me",
+        "A little characteristic of me",
+        "Somewhat characteristic of me",
         "Very characteristic of me",
-        "Extremely characteristic of me"
+        "Entirely characteristic of me"
     ];
 
     const handleOptionSelect = (questionIndex, optionIndex) => {
+        // Store the actual score (1-5) not the index
+        const score = optionIndex + 1;
         const newAnswers = {
             ...answers,
-            [questionIndex]: optionIndex
+            [questionIndex]: score
         };
         setAnswers(newAnswers);
 
@@ -201,7 +204,7 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
 
                         <div className="flex flex-col items-start p-0 gap-1.5 sm:gap-2 lg:gap-2.5 w-full h-auto flex-none order-1 self-stretch grow-0">
                             {options.map((option, index) => {
-                                const isSelected = answers[currentQuestion] === index;
+                                const isSelected = answers[currentQuestion] === (index + 1);
                                 return (
                                     <motion.div
                                         key={`${currentQuestion}-${index}`}

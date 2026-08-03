@@ -3,84 +3,46 @@ import { motion } from "framer-motion";
 import vector from "../assets/icons/Vector.svg";
 
 const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
-    // Calculate BFNE score with reverse scoring
-    const calculateBFNEScore = (answers) => {
-        // Reverse scored items: 2, 4, 7, 10 (0-indexed: 1, 3, 6, 9)
-        const reverseScoredItems = [1, 3, 6, 9];
+    // Calculate BFNE-II score - NO REVERSE SCORING
+    const calculateBFNEIIScore = (answers) => {
         const totalQuestions = 12;
-
         let totalScore = 0;
 
-        // Iterate over each question by index
+        // Simply sum all answers (each is 1-5)
         for (let i = 0; i < totalQuestions; i++) {
-            // Get the answer for this question (default to 0 if not answered)
-            const value = answers[i] !== undefined ? answers[i] : 0;
-
-            if (reverseScoredItems.includes(i)) {
-                // Reverse score: 0->4, 1->3, 2->2, 3->1, 4->0
-                totalScore += (4 - value);
-            } else {
-                totalScore += value;
-            }
+            const value = answers[i] !== undefined ? answers[i] : 1;
+            totalScore += value;
         }
 
-        // Convert from 0-4 scale to 1-5 scale (add 1 to each answer)
-        // Total score range: 12-60
-        const finalScore = totalScore + 12;
-
-        return finalScore;
+        return totalScore; // Range: 12-60
     };
 
-    // Get result category based on score
+    // Get result category based on score using client's exact ranges
     const getResultCategory = (score) => {
-        // Using the ranges specified by client: 1-20, 21-40, 41-60
-        if (score <= 20) {
+        if (score <= 12) {
             return {
-                type: "Low Social Anxiety",
-                description: "You show very low levels of social anxiety. You're comfortable in social situations and don't worry much about others' opinions. You have a healthy sense of self and are able to engage with others without excessive concern about being judged."
+                type: "Low Fear of Negative Evaluation",
+                description: "Based on your responses, you tend to feel comfortable being yourself around others, without spending much energy worrying about how you're perceived. Remember, there are no right or wrong answers here, this is a self-awareness tool.",
+                disclaimer: "It is always recommended to consult a medical professional within the field of psychology to fully understand the results of this tool. This result is not considered medical advice."
             };
-        } else if (score <= 40) {
+        } else if (score <= 24) {
             return {
-                type: "Moderate Social Anxiety",
-                description: "You experience moderate levels of social anxiety. You sometimes worry about others' opinions and may feel some discomfort in social situations. This is a common experience that many people share. Consider practicing self-compassion and gradually building confidence in social settings."
+                type: "Average Fear of Negative Evaluation",
+                description: "Based on your responses, you tend to feel comfortable being yourself around others in some situations, while noticing more concern in others. Remember, there are no right or wrong answers here, this is a self-awareness tool.",
+                disclaimer: "It is always recommended to consult a medical professional within the field of psychology to fully understand the results of this tool. This result is not considered medical advice."
             };
         } else {
             return {
-                type: "High Social Anxiety",
-                description: "You show signs of significant social anxiety. You frequently worry about others' opinions and may find social situations particularly challenging. This level of social anxiety can impact daily life. Consider speaking with a mental health professional who can help you develop strategies to manage these feelings."
+                type: "High Fear of Negative Evaluation",
+                description: "Based on your responses, you tend to spend more energy worrying about how you're perceived by others, which can make social situations feel more effortful. Remember, there are no right or wrong answers here, this is a self-awareness tool.",
+                disclaimer: "It is always recommended to consult a medical professional within the field of psychology to fully understand the results of this tool. This result is not considered medical advice."
             };
         }
     };
 
     // Calculate score
-    const totalScore = calculateBFNEScore(answers);
+    const totalScore = calculateBFNEIIScore(answers);
     const result = getResultCategory(totalScore);
-
-    // Get personalized article recommendations based on result type
-    const getArticles = (resultType) => {
-        const articles = {
-            "Low Social Anxiety": [
-                "Maintaining Healthy Social Connections",
-                "How to Support Others with Social Anxiety",
-                "Building Deeper Relationships Through Empathy"
-            ],
-            "Moderate Social Anxiety": [
-                "Mindful Practices to Overcome Social Pressure and Find Peace",
-                "5 Ways to Build Social Confidence",
-                "Understanding the Hidden Triggers Behind Social Anxiety and Fear"
-            ],
-            "High Social Anxiety": [
-                "Understanding the Hidden Triggers Behind Social Anxiety and Fear",
-                "Seeking Professional Help for Social Anxiety",
-                "Self-Care Strategies for Managing Anxiety",
-                "Support Groups and Community Resources"
-            ]
-        };
-
-        return articles[resultType] || articles["Moderate Social Anxiety"];
-    };
-
-    const recommendedArticles = getArticles(result.type);
 
     // Animation variants
     const containerVariants = {
@@ -120,19 +82,6 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
         },
     };
 
-    const articleVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: (i) => ({
-            opacity: 1,
-            x: 0,
-            transition: {
-                delay: i * 0.08,
-                duration: 0.4,
-                ease: [0.25, 0.1, 0.25, 1],
-            },
-        }),
-    };
-
     return (
         <motion.div
             className="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 my-2 sm:my-3 lg:my-4 h-auto w-full max-w-[604px] mx-auto bg-[#FFF2D5] rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] overflow-hidden"
@@ -156,91 +105,68 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
                         className="flex flex-col items-center p-0 gap-1 sm:gap-1.5 lg:gap-2 w-full h-auto flex-none order-1 self-stretch grow-0"
                         variants={itemVariants}
                     >
-                        <h1 className="w-full h-auto font-['Lora'] font-semibold text-xl sm:text-2xl lg:text-3xl leading-[102.08%] text-center text-[#191C1C] flex-none order-0 self-stretch grow-0">
-                            Congratulations!
+                        <h1
+                            className="w-full max-w-[540px] h-auto font-['Lato'] font-normal text-[28px] leading-[102%] text-center text-[#191C1C] flex-none order-0 self-stretch grow-0"
+                            style={{ letterSpacing: '0%' }}
+                        >
+                            Your Scores Show:
                         </h1>
-                        <p className="w-full h-auto font-['Lato'] font-normal text-lg sm:text-xl lg:text-2xl leading-[102.08%] text-center text-[#191C1C] flex-none order-1 self-stretch grow-0">
-                            You are a {result.type}
+
+                        <p
+                            className="w-full max-w-[541px] h-auto font-['Lora'] font-semibold text-[32px] leading-[102%] text-center text-[#191C1C] flex-none order-1 self-stretch grow-0"
+                            style={{ letterSpacing: '0%' }}
+                        >
+                            {result.type}
                         </p>
                     </motion.div>
                 </div>
 
-                {/* Underline - Just below the result text */}
-                <motion.div
-                    className="w-[180px] sm:w-[200px] lg:w-[240px] h-[1px] mx-auto bg-[#191C1C] flex-none order-1 self-center"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                />
-
-                {/* Description */}
+                {/* Description - Lato Light 20px, 96px height */}
                 <motion.p
-                    className="w-full h-auto font-['Lato'] font-light text-sm sm:text-base lg:text-lg leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0"
+                    className="w-full max-w-[540px] h-[96px] font-['Lato'] font-light text-[20px] leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0 flex items-center"
+                    style={{ letterSpacing: '0%' }}
                     variants={itemVariants}
                 >
                     {result.description}
                 </motion.p>
 
-                {/* Recommended Articles Section */}
+                {/* Disclaimer with Border - Left aligned */}
                 <motion.div
-                    className="box-border flex flex-col items-start p-4 sm:p-5 lg:p-6 gap-3 sm:gap-3.5 lg:gap-4 w-full max-w-[540px] h-auto min-h-[140px] sm:min-h-[160px] lg:min-h-[188px] border border-[#191C1C] rounded-2xl sm:rounded-3xl flex-none order-3 self-stretch grow-0"
+                    className="w-full max-w-[492px] h-auto border border-[#191C1C] rounded-[24px] p-6 flex flex-col gap-4 flex-none order-3 self-center grow-0"
                     variants={itemVariants}
                 >
-                    <h3 className="w-full h-auto font-['Merriweather'] font-normal text-base sm:text-lg lg:text-xl leading-[120%] text-[#191C1C] flex-none order-0 self-stretch grow-0">
-                        Recommended Articles to Read
-                    </h3>
-                    <div className="flex flex-col items-start p-0 gap-1.5 sm:gap-2 w-full h-auto flex-none order-1 self-stretch grow-0">
-                        {recommendedArticles.map((article, index) => (
-                            <motion.div
-                                key={index}
-                                className="flex flex-row items-start gap-1.5 sm:gap-2 w-full h-auto flex-none order-0 self-stretch grow-0"
-                                custom={index}
-                                variants={articleVariants}
-                                initial="hidden"
-                                animate="visible"
-                            >
-                                <span className="text-[#191C1C] font-['Lato'] text-xs sm:text-sm lg:text-base leading-[120%] flex-shrink-0">•</span>
-                                <motion.a
-                                    href="#"
-                                    className="inline-block font-['Lato'] font-light text-xs sm:text-sm lg:text-base leading-[120%] text-[#191C1C] hover:text-[#FFCF6C] transition-colors border-b border-[#191C1C] border-opacity-20 pb-0.5"
-                                    whileHover={{ x: 5 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {article}
-                                </motion.a>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <p
+                        className="w-full h-[57px] font-['Lato'] font-light text-[16px] leading-[120%] text-left text-[#191C1C] flex items-center"
+                        style={{ letterSpacing: '0%' }}
+                    >
+                        {result.disclaimer}
+                    </p>
                 </motion.div>
 
-                {/* Action Buttons */}
-                <motion.div
-                    className="flex flex-col sm:flex-row justify-center items-center p-0 gap-3 sm:gap-4 lg:gap-6 w-full max-w-[401px] h-auto sm:h-[56px] flex-none order-4 self-center grow-0"
-                    variants={itemVariants}
-                >
+                <div className="flex flex-row justify-center items-center w-full max-w-[401px] h-auto flex-none order-4 self-center grow-0 mt-2">
                     <motion.button
-                        className="flex flex-row justify-center items-center p-3 sm:p-4 gap-2.5 w-full sm:w-[133px] h-[48px] sm:h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none order-0 grow-0"
+                        className="flex flex-row justify-center  items-center p-3 sm:p-4 gap-2.5 w-[133px] h-[48px] sm:h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none mr-[-10px]"
                         onClick={onRetake}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <span className="w-full h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] text-[#191C1C] flex-none order-0 grow-0">
+                        <span className="w-full h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] text-[#191C1C] flex-none order-0 grow-0 whitespace-nowrap">
                             Retake Test
                         </span>
                     </motion.button>
                     <motion.button
-                        className="flex flex-row justify-center items-center p-3 sm:p-4 px-0 gap-2.5 w-full sm:w-[236px] h-[48px] sm:h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none order-1 grow-0"
+                        className="flex flex-row justify-center  items-center p-3 sm:p-4 px-0 gap-2.5 w-[150px] h-[48px] sm:h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none"
                         onClick={onLearnMore}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <span className="w-[220px] h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] underline text-[#191C1C] flex-none order-0 grow-0">
-                            Learn More about this Test
+                        <span className="w-[220px] h-auto font-['Lato'] font-semibold text-sm sm:text-base lg:text-lg leading-[120%] underline text-[#191C1C] flex-none order-0 grow-0 whitespace-nowrap">
+                            See All Tests
                         </span>
                     </motion.button>
-                </motion.div>
+                </div>
             </div>
         </motion.div>
     );
