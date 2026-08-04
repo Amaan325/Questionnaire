@@ -88,27 +88,6 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
         }),
     };
 
-    const optionVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: (i) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                delay: i * 0.06,
-                duration: 0.4,
-                ease: [0.25, 0.1, 0.25, 1],
-            },
-        }),
-        selected: {
-            borderColor: "#FFCF6C",
-            backgroundColor: "#FFCF6C",
-            transition: {
-                duration: 0.3,
-                ease: [0.25, 0.1, 0.25, 1],
-            },
-        },
-    };
-
     return (
         <div className="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 my-2 sm:my-3 lg:my-4 h-auto w-full max-w-[604px] mx-auto bg-[#FFF2D5] rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] overflow-hidden">
             <div className="flex flex-col items-start p-0 gap-3 sm:gap-4 lg:gap-5 w-full max-w-[540px] h-auto flex-none order-0 self-stretch grow-0">
@@ -206,12 +185,8 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
                             {options.map((option, index) => {
                                 const isSelected = answers[currentQuestion] === (index + 1);
                                 return (
-                                    <motion.div
+                                    <div
                                         key={`${currentQuestion}-${index}`}
-                                        custom={index}
-                                        variants={optionVariants}
-                                        initial="hidden"
-                                        animate={isSelected ? "selected" : "visible"}
                                         className={`box-border flex flex-row items-center p-2 sm:p-2.5 lg:p-3 px-3 sm:px-4 gap-2 sm:gap-2.5 w-full h-auto min-h-[36px] sm:min-h-[42px] lg:min-h-[48px] border rounded-xl sm:rounded-2xl cursor-pointer transition-all ${isSelected
                                             ? 'border-[#FFCF6C] bg-[#FFCF6C]'
                                             : 'border-[#191C1C] hover:border-[#FFCF6C] hover:bg-[#FFCF6C] hover:bg-opacity-30'
@@ -219,20 +194,15 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
                                         onClick={() => handleOptionSelect(currentQuestion, index)}
                                     >
                                         <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 flex-none order-0 grow-0 relative">
-                                            <motion.div
+                                            <div
                                                 className={`absolute w-[10px] h-[10px] sm:w-[12px] sm:h-[12px] lg:w-[14px] lg:h-[14px] left-[2px] top-[2px] rounded-full border ${isSelected
                                                     ? 'border-[#191C1C] bg-[#FFCF6C]'
                                                     : 'border-[#191C1C]'
                                                     }`}
-                                                animate={isSelected ? { scale: [1, 1.2, 1] } : {}}
-                                                transition={{ duration: 0.3 }}
                                             />
                                             {isSelected && (
-                                                <motion.div
+                                                <div
                                                     className="absolute w-[4px] h-[4px] sm:w-[5px] sm:h-[5px] lg:w-[6px] lg:h-[6px] left-[5px] top-[5px] sm:left-[5.5px] sm:top-[5.5px] lg:left-[7px] lg:top-[7px] rounded-full bg-[#191C1C]"
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ duration: 0.3, delay: 0.1 }}
                                                 />
                                             )}
                                         </div>
@@ -240,7 +210,7 @@ const SocialAnxietyQuestions = ({ onLeaveTest, onComplete }) => {
                                             }`}>
                                             {option}
                                         </span>
-                                    </motion.div>
+                                    </div>
                                 );
                             })}
                         </div>
