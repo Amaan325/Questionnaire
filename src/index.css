@@ -1,3 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss" important;
+
+.react-app-root-host,
+.react-app {
+  isolation: isolate !important;
+}
+
+.react-app,
+.react-app * {
+  box-sizing: border-box !important;
+}
+
+.react-app {
+  width: 100% !important;
+  min-width: 0 !important;
+  color: #191c1c !important;
+  font-family: Lato, Arial, sans-serif !important;
+  line-height: 1.2 !important;
+  text-align: left !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.react-app :where(h1, h2, h3, h4, h5, h6, p, figure, blockquote) {
+  margin: 0 !important;
+}
+
+.react-app :where(button, input, textarea, select) {
+  font: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.react-app :where(button) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.react-app :where(img, svg) {
+  display: block !important;
+  max-width: 100% !important;
+}
+
+.react-app :where(svg) {
+  flex-shrink: 0 !important;
+}

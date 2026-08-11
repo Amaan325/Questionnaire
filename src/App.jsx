@@ -9,7 +9,7 @@ const App = ({ quiz = 'social-anxiety' }) => {
   const QuizComponent = quizzes[quiz] ;
 
   return (
-    <div>
+    <div className="react-app">
       <QuizComponent />
     </div>
   );

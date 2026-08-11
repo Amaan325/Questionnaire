@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SocialAnxietyLanding from "./SocialAnxietyLanding";
 import SocialAnxietyQuestions from "./SocialAnxietyQuestions";
 import SocialAnxietyResults from "./SocialAnxietyResults";

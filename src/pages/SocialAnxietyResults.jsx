@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import vector from "../assets/icons/Vector.svg";
 
