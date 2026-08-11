@@ -145,7 +145,7 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
 
                 <div className="flex flex-row justify-center items-center w-full max-w-[401px] h-auto flex-none order-4 self-center grow-0 mt-2">
                     <motion.button
-                        className="flex flex-row justify-center  items-center p-3 sm:p-4 gap-2.5 w-[133px] h-[48px] sm:h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none mr-[-10px]"
+                        className="flex flex-row justify-center  items-center p-3 sm:p-4 gap-2.5 w-[133px] h-[48px] border-0 sm:h-[56px] bg-[#FFCF6C] rounded-[10px] hover:bg-[#FFC04C] transition-colors flex-none mr-[-10px]"
                         onClick={onRetake}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -156,9 +156,9 @@ const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
                         </span>
                     </motion.button>
                     <motion.button
-                        className="flex flex-row justify-center  items-center p-3 sm:p-4 px-0 gap-2.5 w-[150px] h-[48px] sm:h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none"
+                        className="flex flex-row justify-center  items-center p-3 sm:p-4 px-0 bg-transparent gap-2.5 w-[150px] h-[48px] border-0 sm:h-[56px] rounded-[10px] hover:opacity-70 transition-opacity flex-none"
                         onClick={onLearnMore}
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.05, backgroundColor: "transparent" }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.2 }}
                     >

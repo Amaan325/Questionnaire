@@ -30,7 +30,7 @@ const SocialAnxietyTest = () => {
     };
 
     const handleLearnMore = () => {
-        alert('Learn more about this test');
+        window.location.href = "/test";
     };
 
     return (
