@@ -34,7 +34,7 @@ const SocialAnxietyTest = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-[#F5F0E8]">
+        <div className="flex items-center justify-center">
             {!testStarted && !testCompleted && (
                 <SocialAnxietyLanding onStartTest={handleStartTest} />
             )}
