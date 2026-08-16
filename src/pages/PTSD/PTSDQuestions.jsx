@@ -13,7 +13,8 @@ const PTSDQuestions = ({ onLeaveTest, onComplete }) => {
 
     const traumaQuestion = {
         id: 'trauma',
-        text: 'Sometimes things happen to people that are unusually or especially frightening, horrible, or traumatic. For example: a serious accident or fire, a physical or sexual assault or abuse, an earthquake or flood, a war, seeing someone be killed or seriously injured, having a loved one die through homicide or suicide. Have you ever experienced this kind of event?'
+        text: 'Sometimes things happen to people that are unusually or especially frightening, horrible, or traumatic. For example: a serious accident or fire, a physical or sexual assault or abuse, an earthquake or flood, a war, seeing someone be killed or seriously injured, having a loved one die through homicide or suicide.',
+        question: 'Have you ever experienced this kind of event?'
     };
 
     const symptomQuestions = [
@@ -234,7 +235,16 @@ const PTSDQuestions = ({ onLeaveTest, onComplete }) => {
                                 >
                                     {/* Question */}
                                     <h2 className="w-full h-auto font-['Lora'] font-semibold text-base sm:text-lg lg:text-2xl leading-[102.08%] text-[#191C1C] flex-none order-0 self-stretch grow-0">
-                                        {isTraumaStep ? traumaQuestion.text : currentQuestion.text}
+                                        {isTraumaStep ? (
+                                            <>
+                                                {traumaQuestion.text}
+                                                <br />
+                                                <br />
+                                                {traumaQuestion.question}
+                                            </>
+                                        ) : (
+                                            currentQuestion.text
+                                        )}
                                     </h2>
 
                                     {/* Options */}

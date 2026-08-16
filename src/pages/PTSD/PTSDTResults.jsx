@@ -1,6 +1,7 @@
 // PTSDTResults.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import vector from "../../assets/icons/Vector.svg";
 
 const PTSDTResults = ({ answers, onRetake, onLearnMore }) => {
     const { traumaExposure, score } = answers;
@@ -82,25 +83,6 @@ const PTSDTResults = ({ answers, onRetake, onLearnMore }) => {
         },
     };
 
-    // Checkmark SVG icon (inline)
-    const CheckIcon = () => (
-        <svg
-            viewBox="0 0 72 72"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full"
-        >
-            <circle cx="36" cy="36" r="36" fill="#4CAF50" />
-            <path
-                d="M22 36L32 46L50 26"
-                stroke="white"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
-
     return (
         <motion.div
             className="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 my-2 sm:my-3 lg:my-4 h-auto w-full max-w-[604px] mx-auto bg-[#FFF2D5] rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] overflow-hidden"
@@ -116,7 +98,7 @@ const PTSDTResults = ({ answers, onRetake, onLearnMore }) => {
                         className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[72px] lg:h-[72px] flex-none order-0 grow-0 relative"
                         variants={iconVariants}
                     >
-                        <CheckIcon />
+                        <img src={vector} alt="Success" className="w-full h-full" />
                     </motion.div>
 
                     {/* Text Content */}
@@ -142,7 +124,7 @@ const PTSDTResults = ({ answers, onRetake, onLearnMore }) => {
 
                 {/* Description */}
                 <motion.p
-                    className="w-full max-w-[540px] h-auto font-['Lato'] font-light text-[20px] leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0"
+                    className="w-full max-w-[540px] h-[96px] font-['Lato'] font-light text-[20px] leading-[120%] text-center text-[#191C1C] flex-none order-2 self-stretch grow-0 flex items-center"
                     style={{ letterSpacing: '0%' }}
                     variants={itemVariants}
                 >
@@ -155,7 +137,7 @@ const PTSDTResults = ({ answers, onRetake, onLearnMore }) => {
                     variants={itemVariants}
                 >
                     <p
-                        className="w-full h-auto font-['Lato'] font-light text-[16px] leading-[120%] text-left text-[#191C1C]"
+                        className="w-full h-[57px] font-['Lato'] font-light text-[16px] leading-[120%] text-left text-[#191C1C] flex items-center"
                         style={{ letterSpacing: '0%' }}
                     >
                         {result.disclaimer}
