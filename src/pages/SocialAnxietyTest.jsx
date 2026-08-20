@@ -1,5 +1,4 @@
-// SocialAnxietyTest.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import SocialAnxietyLanding from "./SocialAnxietyLanding";
 import SocialAnxietyQuestions from "./SocialAnxietyQuestions";
 import SocialAnxietyResults from "./SocialAnxietyResults";
@@ -37,7 +36,7 @@ const SocialAnxietyTest = () => {
     };
 
     const handleLearnMore = () => {
-        alert('Learn more about this test');
+        window.location.href = "/test";
     };
 
     const handleSwitchToPTSD = () => {
@@ -55,8 +54,7 @@ const SocialAnxietyTest = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-[#F5F0E8] p-4">
-            {/* Test Selector - Optional, can be removed if you want separate routes */}
+        <div className="flex items-center justify-center">
             {!testStarted && !testCompleted && (
                 <div className="flex gap-4 mb-6">
                     <button

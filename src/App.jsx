@@ -1,9 +1,16 @@
-import React from 'react';
+
 import SocialAnxietyTest from './pages/SocialAnxietyTest';
-const App = () => {
+
+const quizzes = {
+  'social-anxiety': SocialAnxietyTest,
+};
+
+const App = ({ quiz = 'social-anxiety' }) => {
+  const QuizComponent = quizzes[quiz] ;
+
   return (
-    <div>
-      <SocialAnxietyTest />
+    <div className="react-app">
+      <QuizComponent />
     </div>
   );
 }
