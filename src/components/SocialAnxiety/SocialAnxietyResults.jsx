@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import vector from "../assets/icons/Vector.svg";
+import vector from "../../assets/icons/Vector.svg";
 
 const SocialAnxietyResults = ({ answers, onRetake, onLearnMore }) => {
     // Calculate BFNE-II score - NO REVERSE SCORING
